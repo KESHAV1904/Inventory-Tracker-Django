@@ -1,0 +1,68 @@
+{% extends 'dashboard/base.html' %}
+{% block dashboardcontent %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col" style="width: 50%; float:left; border-right: 2px #000 solid;">
+                <form>
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="inputName">Nom et Prénom</label>
+                        <input type="text" class="form-control" placeholder="Nom Prénom">
+                      </div>
+                    </div>
+                    ----
+                    <div>
+                        <h5>Produits cliqués</h5>
+                    </div>
+                    ----
+                    <h3>Total :</h3>
+                </form>
+                
+            </div>
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+
+
+
+                    <div class="form-group mx-4 mt-4">
+                        <table class='table'>
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope='col'>ID</th>
+                                <th scope='col'>Nom</th>
+                                <th scope='col'>Prix</th>
+                                <th scope='col'>Quantité</th>
+                            </tr>
+                        </thead>
+            
+                        <tbody >
+                            {% for item in all_products %}
+                                <tr>
+                                    <td scope='row'>{{item.id}}</th>
+                                    <td scope='row'>{{item.product_name}}</td>
+                                    <td scope='row'>{{item.product_price}}</td>
+                                    <td scope='row'>{{item.product_quantity}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                    
+                    <div class="form-group mx-4 mt-4">
+                        <input type="number" required name="sellqty" class="form-control" placeholder="Quantité" min="1">
+                    </div>
+            
+                    <div class="form-group mx-4 mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Vendre</button>
+                    </div>
+            
+                </form>
+            </div>
+        </div>  
+    </div>
+    
+
+{% endblock %}
